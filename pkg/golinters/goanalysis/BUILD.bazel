@@ -1,0 +1,45 @@
+load("@rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "goanalysis",
+    srcs = [
+        "adapters.go",
+        "errors.go",
+        "issue.go",
+        "linter.go",
+        "metalinter.go",
+        "runner.go",
+        "runner_action.go",
+        "runner_facts.go",
+        "runner_loadingpackage.go",
+        "runners.go",
+    ],
+    importpath = "github.com/golangci/golangci-lint/pkg/golinters/goanalysis",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//internal/errorutil",
+        "//internal/pkgcache",
+        "//pkg/golinters/goanalysis/load",
+        "//pkg/lint/linter",
+        "//pkg/logutils",
+        "//pkg/packages",
+        "//pkg/result",
+        "//pkg/timeutils",
+        "@com_github_hashicorp_go_multierror//:go-multierror",
+        "@org_golang_x_tools//go/analysis",
+        "@org_golang_x_tools//go/gcexportdata",
+        "@org_golang_x_tools//go/loader",
+        "@org_golang_x_tools//go/packages",
+        "@org_golang_x_tools//go/types/objectpath",
+    ],
+)
+
+go_test(
+    name = "goanalysis_test",
+    srcs = ["linter_test.go"],
+    embed = [":goanalysis"],
+    deps = [
+        "@com_github_stretchr_testify//assert",
+        "@org_golang_x_tools//go/packages",
+    ],
+)

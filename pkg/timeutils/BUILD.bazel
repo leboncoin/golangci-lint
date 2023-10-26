@@ -1,0 +1,9 @@
+load("@rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "timeutils",
+    srcs = ["stopwatch.go"],
+    importpath = "github.com/golangci/golangci-lint/pkg/timeutils",
+    visibility = ["//visibility:public"],
+    deps = ["//pkg/logutils"],
+)

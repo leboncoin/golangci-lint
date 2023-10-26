@@ -1,0 +1,25 @@
+load("@rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "cache",
+    srcs = [
+        "cache.go",
+        "default.go",
+        "hash.go",
+    ],
+    importpath = "github.com/golangci/golangci-lint/internal/cache",
+    visibility = ["//:__subpackages__"],
+    deps = [
+        "//internal/renameio",
+        "//internal/robustio",
+    ],
+)
+
+go_test(
+    name = "cache_test",
+    srcs = [
+        "cache_test.go",
+        "hash_test.go",
+    ],
+    embed = [":cache"],
+)

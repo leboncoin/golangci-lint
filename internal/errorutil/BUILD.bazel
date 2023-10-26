@@ -1,0 +1,8 @@
+load("@rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "errorutil",
+    srcs = ["errors.go"],
+    importpath = "github.com/golangci/golangci-lint/internal/errorutil",
+    visibility = ["//:__subpackages__"],
+)

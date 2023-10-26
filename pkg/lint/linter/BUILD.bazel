@@ -1,0 +1,22 @@
+load("@rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "linter",
+    srcs = [
+        "config.go",
+        "context.go",
+        "linter.go",
+    ],
+    importpath = "github.com/golangci/golangci-lint/pkg/lint/linter",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//internal/pkgcache",
+        "//pkg/config",
+        "//pkg/fsutils",
+        "//pkg/golinters/goanalysis/load",
+        "//pkg/logutils",
+        "//pkg/result",
+        "@org_golang_x_tools//go/analysis",
+        "@org_golang_x_tools//go/packages",
+    ],
+)

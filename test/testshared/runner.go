@@ -342,6 +342,8 @@ func InstallGolangciLint(tb testing.TB) string {
 	tb.Helper()
 
 	if os.Getenv(envGolangciLintInstalled) != "true" {
+		tb.Skip("golangci-lint not installed")
+
 		cmd := exec.Command("make", "-C", "..", "build")
 
 		output, err := cmd.CombinedOutput()

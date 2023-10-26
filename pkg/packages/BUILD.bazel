@@ -1,0 +1,23 @@
+load("@rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "packages",
+    srcs = [
+        "errors.go",
+        "skip.go",
+        "util.go",
+    ],
+    importpath = "github.com/golangci/golangci-lint/pkg/packages",
+    visibility = ["//visibility:public"],
+    deps = ["@org_golang_x_tools//go/packages"],
+)
+
+go_test(
+    name = "packages_test",
+    srcs = [
+        "skip_test.go",
+        "util_test.go",
+    ],
+    embed = [":packages"],
+    deps = ["@com_github_stretchr_testify//assert"],
+)

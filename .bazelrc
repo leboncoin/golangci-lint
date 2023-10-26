@@ -1,0 +1,27 @@
+# Enable Bzlmod for every Bazel command
+common --enable_bzlmod
+
+# Run tests with verbose output (equivalent to run Go tests with `go test -v`).
+test:verbose --test_env GO_TEST_WRAP_TESTV=1
+
+# Only *_test and test_suite rules will be built and other targets specified
+# on the command line will be ignored.
+test --build_tests_only
+
+# Output test errors to stderr so users don't have to `cat` or open test failure log files when test
+# fail. This makes the log noiser in exchange for reducing the time-to-feedback on test failures for
+# users.
+# Docs: https://bazel.build/docs/user-manual#test-output
+test --test_output=errors
+
+# Print the path to a test log using the relative path that makes use of the 'testlogs' convenience symlink.
+test --print_relative_test_log_paths
+
+# Populate env used for stamping builds.
+common:release --stamp --workspace_status_command="./release/version.sh"
+
+build --incompatible_enable_cc_toolchain_resolution
+build --action_env BAZEL_DO_NOT_DETECT_CPP_TOOLCHAIN=1
+
+# Import the user's Bazel configuration if the file exist.
+try-import %workspace%/.bazelrc.user

@@ -1,0 +1,41 @@
+load("@rules_go//go:def.bzl", "go_library", "go_test")
+
+# gazelle:exclude testdata
+
+go_library(
+    name = "testshared",
+    srcs = [
+        "analysis.go",
+        "directives.go",
+        "runner.go",
+        "runner_unix.go",
+        "runner_windows.go",
+    ],
+    importpath = "github.com/golangci/golangci-lint/test/testshared",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//pkg/exitcodes",
+        "//pkg/fsutils",
+        "//pkg/logutils",
+        "//pkg/result",
+        "@com_github_hashicorp_go_version//:go-version",
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//require",
+    ],
+)
+
+go_test(
+    name = "testshared_test",
+    srcs = [
+        "analysis_test.go",
+        "directives_test.go",
+        "runner_test.go",
+    ],
+    data = glob(["testdata/**"]),
+    embed = [":testshared"],
+    deps = [
+        "//pkg/exitcodes",
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//require",
+    ],
+)

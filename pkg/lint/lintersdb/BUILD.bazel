@@ -1,0 +1,34 @@
+load("@rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "lintersdb",
+    srcs = [
+        "custom_linters.go",
+        "enabled_set.go",
+        "manager.go",
+        "validator.go",
+    ],
+    importpath = "github.com/golangci/golangci-lint/pkg/lint/lintersdb",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//pkg/config",
+        "//pkg/golinters",
+        "//pkg/golinters/goanalysis",
+        "//pkg/lint/linter",
+        "//pkg/logutils",
+        "@com_github_hashicorp_go_multierror//:go-multierror",
+        "@com_github_spf13_viper//:viper",
+        "@org_golang_x_tools//go/analysis",
+    ],
+)
+
+go_test(
+    name = "lintersdb_test",
+    srcs = ["enabled_set_test.go"],
+    embed = [":lintersdb"],
+    deps = [
+        "//pkg/config",
+        "//pkg/lint/linter",
+        "@com_github_stretchr_testify//assert",
+    ],
+)

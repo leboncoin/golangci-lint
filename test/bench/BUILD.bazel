@@ -1,0 +1,11 @@
+load("@rules_go//go:def.bzl", "go_test")
+
+go_test(
+    name = "bench_test",
+    srcs = ["bench_test.go"],
+    deps = [
+        "//test/testshared",
+        "@com_github_mitchellh_go_ps//:go-ps",
+        "@com_github_shirou_gopsutil_v3//process",
+    ],
+)

@@ -1,0 +1,14 @@
+load("@rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "print_ast_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/golangci/golangci-lint/scripts/print_ast",
+    visibility = ["//visibility:private"],
+)
+
+go_binary(
+    name = "print_ast",
+    embed = [":print_ast_lib"],
+    visibility = ["//visibility:public"],
+)

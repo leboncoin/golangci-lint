@@ -1,0 +1,13 @@
+load("@rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "ruleguard",
+    srcs = [
+        "dup.go",
+        "rangeExprCopy.go",
+        "strings_simplify.go",
+    ],
+    importpath = "github.com/golangci/golangci-lint/test/ruleguard",
+    visibility = ["//visibility:public"],
+    deps = ["@com_github_quasilyte_go_ruleguard_dsl//:dsl"],
+)

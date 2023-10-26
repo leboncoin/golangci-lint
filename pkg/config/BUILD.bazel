@@ -1,0 +1,36 @@
+load("@rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "config",
+    srcs = [
+        "config.go",
+        "issues.go",
+        "linters.go",
+        "linters_settings.go",
+        "output.go",
+        "reader.go",
+        "run.go",
+        "severity.go",
+    ],
+    importpath = "github.com/golangci/golangci-lint/pkg/config",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//pkg/exitcodes",
+        "//pkg/fsutils",
+        "//pkg/logutils",
+        "@com_github_hashicorp_go_version//:go-version",
+        "@com_github_ldez_gomoddirectives//:gomoddirectives",
+        "@com_github_mitchellh_go_homedir//:go-homedir",
+        "@com_github_mitchellh_mapstructure//:mapstructure",
+        "@com_github_spf13_viper//:viper",
+        "@in_gopkg_yaml_v3//:yaml_v3",
+        "@org_golang_x_exp//slices",
+    ],
+)
+
+go_test(
+    name = "config_test",
+    srcs = ["issues_test.go"],
+    embed = [":config"],
+    deps = ["@com_github_stretchr_testify//assert"],
+)

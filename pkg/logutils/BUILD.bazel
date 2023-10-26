@@ -1,0 +1,21 @@
+load("@rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "logutils",
+    srcs = [
+        "log.go",
+        "logutils.go",
+        "mock.go",
+        "out.go",
+        "stderr_log.go",
+    ],
+    importpath = "github.com/golangci/golangci-lint/pkg/logutils",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//pkg/exitcodes",
+        "@com_github_fatih_color//:color",
+        "@com_github_mattn_go_colorable//:go-colorable",
+        "@com_github_sirupsen_logrus//:logrus",
+        "@com_github_stretchr_testify//mock",
+    ],
+)

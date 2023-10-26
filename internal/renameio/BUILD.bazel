@@ -1,0 +1,60 @@
+load("@rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "renameio",
+    srcs = ["renameio.go"],
+    importpath = "github.com/golangci/golangci-lint/internal/renameio",
+    visibility = ["//:__subpackages__"],
+    deps = ["//internal/robustio"],
+)
+
+go_test(
+    name = "renameio_test",
+    srcs = [
+        "renameio_test.go",
+        "umask_test.go",
+    ],
+    embed = [":renameio"],
+    deps = select({
+        "@rules_go//go/platform:aix": [
+            "//internal/robustio",
+        ],
+        "@rules_go//go/platform:android": [
+            "//internal/robustio",
+        ],
+        "@rules_go//go/platform:darwin": [
+            "//internal/robustio",
+        ],
+        "@rules_go//go/platform:dragonfly": [
+            "//internal/robustio",
+        ],
+        "@rules_go//go/platform:freebsd": [
+            "//internal/robustio",
+        ],
+        "@rules_go//go/platform:illumos": [
+            "//internal/robustio",
+        ],
+        "@rules_go//go/platform:ios": [
+            "//internal/robustio",
+        ],
+        "@rules_go//go/platform:js": [
+            "//internal/robustio",
+        ],
+        "@rules_go//go/platform:linux": [
+            "//internal/robustio",
+        ],
+        "@rules_go//go/platform:netbsd": [
+            "//internal/robustio",
+        ],
+        "@rules_go//go/platform:openbsd": [
+            "//internal/robustio",
+        ],
+        "@rules_go//go/platform:solaris": [
+            "//internal/robustio",
+        ],
+        "@rules_go//go/platform:windows": [
+            "//internal/robustio",
+        ],
+        "//conditions:default": [],
+    }),
+)

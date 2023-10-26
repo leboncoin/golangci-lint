@@ -1,0 +1,20 @@
+load("@rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "nolintlint",
+    srcs = ["nolintlint.go"],
+    importpath = "github.com/golangci/golangci-lint/pkg/golinters/nolintlint",
+    visibility = ["//visibility:public"],
+    deps = ["//pkg/result"],
+)
+
+go_test(
+    name = "nolintlint_test",
+    srcs = ["nolintlint_test.go"],
+    embed = [":nolintlint"],
+    deps = [
+        "//pkg/result",
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//require",
+    ],
+)

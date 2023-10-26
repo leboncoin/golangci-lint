@@ -1,0 +1,16 @@
+load("@rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "fsutils",
+    srcs = [
+        "filecache.go",
+        "files.go",
+        "fsutils.go",
+        "linecache.go",
+        "path_unix.go",
+        "path_windows.go",
+    ],
+    importpath = "github.com/golangci/golangci-lint/pkg/fsutils",
+    visibility = ["//visibility:public"],
+    deps = ["//pkg/logutils"],
+)

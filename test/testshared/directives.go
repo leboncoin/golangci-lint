@@ -137,7 +137,8 @@ func evaluateBuildTags(tb testing.TB, line string) bool {
 }
 
 func buildTagGoVersion(tag string) bool {
-	vRuntime, err := hcversion.NewVersion(strings.TrimPrefix(runtime.Version(), "go"))
+	v := strings.Fields(runtime.Version())[0]
+	vRuntime, err := hcversion.NewVersion(strings.TrimPrefix(v, "go"))
 	if err != nil {
 		return false
 	}

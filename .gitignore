@@ -4,7 +4,10 @@
 /*.pprof
 /*.txt
 /.idea/
+/.ijwb/
 /.vscode/
+/bazel-*
+/.bazelrc.user
 /dist/
 /golangci-lint
 /golangci-lint.exe

@@ -1,0 +1,28 @@
+load("@rules_go//go:def.bzl", "go_binary", "go_library", "go_test")
+
+go_library(
+    name = "expand_website_templates_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/golangci/golangci-lint/scripts/expand_website_templates",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//internal/renameio",
+        "//pkg/config",
+        "//pkg/lint/linter",
+        "//pkg/lint/lintersdb",
+        "@in_gopkg_yaml_v3//:yaml_v3",
+    ],
+)
+
+go_binary(
+    name = "expand_website_templates",
+    embed = [":expand_website_templates_lib"],
+    visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "expand_website_templates_test",
+    srcs = ["main_test.go"],
+    embed = [":expand_website_templates_lib"],
+    deps = ["@com_github_stretchr_testify//require"],
+)

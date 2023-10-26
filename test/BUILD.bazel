@@ -1,0 +1,29 @@
+load("@rules_go//go:def.bzl", "go_test")
+
+# gazelle:exclude testdata
+# gazelle:exclude testdata_etc
+
+go_test(
+    name = "test_test",
+    srcs = [
+        "enabled_linters_test.go",
+        "fix_test.go",
+        "linters_test.go",
+        "output_test.go",
+        "run_test.go",
+    ],
+    data = glob([
+        "testdata/**",
+        "testdata_etc/**",
+    ]),
+    deps = [
+        "//pkg/exitcodes",
+        "//pkg/lint/lintersdb",
+        "//pkg/logutils",
+        "//test/testshared",
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//require",
+        "@com_github_valyala_quicktemplate//:quicktemplate",
+        "@org_golang_x_exp//slices",
+    ],
+)

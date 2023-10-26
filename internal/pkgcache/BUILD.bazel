@@ -1,0 +1,14 @@
+load("@rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "pkgcache",
+    srcs = ["pkgcache.go"],
+    importpath = "github.com/golangci/golangci-lint/internal/pkgcache",
+    visibility = ["//:__subpackages__"],
+    deps = [
+        "//internal/cache",
+        "//pkg/logutils",
+        "//pkg/timeutils",
+        "@org_golang_x_tools//go/packages",
+    ],
+)

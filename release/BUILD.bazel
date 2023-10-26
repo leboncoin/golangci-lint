@@ -1,0 +1,14 @@
+load(":multiarch_binary.bzl", "multiarch_binary")
+
+multiarch_binary(
+    name = "files",
+    binary = "//cmd/golangci-lint",
+    platforms = [
+        "//release/platforms:linux-amd64",
+
+        # Not supported yet by our CC toolchain
+        # See https://github.com/uber/hermetic_cc_toolchain/issues/10
+        # "//release/platforms:macos-amd64",
+        # "//release/platforms:macos-arm64",
+    ],
+)
